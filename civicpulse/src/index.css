@@ -3,36 +3,56 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-[#090A0F] text-[#F3F4F6] antialiased selection:bg-[#FF4500]/30 selection:text-[#FF4500];
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  html {
+    color-scheme: dark;
   }
-
-  /* Custom dark scrollbar */
+  body {
+    @apply bg-civic-dark font-sans text-civic-text antialiased;
+  }
+  ::selection {
+    background: rgba(217, 162, 59, 0.35);
+  }
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #090A0F;
+    background: #131210;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1F2430;
-    border-radius: 9999px;
+    background: #36332d;
+    border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #FF4500;
+    background: #4a463e;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-.glow-orange {
-  box-shadow: 0 0 20px -5px rgba(255, 69, 0, 0.25);
-}
-
-.glow-blue {
-  box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.25);
-}
-
-.glow-green {
-  box-shadow: 0 0 20px -5px rgba(16, 185, 129, 0.25);
-}
+/*
+  TEMPORARY legacy-compat layer.
+  Pages not yet migrated (Submit, PostDetail, GovDashboard, GovPortals) still use
+  the old hard-coded hex classes. These overrides remap them to the new palette so
+  the app stays coherent. Delete this block once those pages use civic-* tokens.
+*/
+.bg-\[\#090A0F\] { background-color: #131210; }
+.bg-\[\#12141D\] { background-color: #1b1a17; }
+.bg-\[\#181C28\], .bg-\[\#161922\] { background-color: #24221e; }
+.bg-\[\#1F2430\] { background-color: #36332d; }
+.border-\[\#1F2430\] { border-color: #36332d; }
+.border-\[\#2D3748\] { border-color: #4a463e; }
+.text-\[\#9CA3AF\] { color: #a29b8d; }
+.text-\[\#F3F4F6\] { color: #eae4d8; }
+.text-\[\#FF4500\] { color: #d9a23b; }
+.bg-\[\#FF4500\] { background-color: #d9a23b; color: #1a1408; }
+.border-\[\#FF4500\] { border-color: #d9a23b; }
+.text-\[\#3B82F6\] { color: #7f9bd0; }
+.bg-\[\#3B82F6\] { background-color: #7f9bd0; color: #1a1408; }
+.hover\:text-\[\#FF4500\]:hover { color: #d9a23b; }
+.hover\:bg-\[\#181C28\]:hover { background-color: #24221e; }
